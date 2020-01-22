@@ -48,13 +48,19 @@ select * from Department where _NAME  = 'Marketting'
 Insert into dbo.Employee values ('Tina','Smith',874550167,4)
 Insert into dbo.EmployeeDetails values (5,1500000,'100','Earth Bend Rd','New York','NY','United States')
 --View all employees in marketing
-Select *
-FROM Employee where deptid=4
+Select FirstName,LastName,_NAME
+FROM Employee a INNER join dbo.Department b on a.deptid = b.ID Where _NAME = 'Marketting'
 --Report of salary from marketing
 Select SUM(Salary) FROM dbo.EmployeeDetails a inner join dbo.Employee b on  a.EmployeeID =b.ID WHERE deptid = 4
+
+Select * FROM dbo.Employee inner join dbo.Employee b on  E =b.ID Group by deptid
 --Report for each department
-Select count(*) As 'Department Count' FROM dbo.EmployeeDetails a inner join dbo.Employee b on  a.EmployeeID =b.ID Group BY deptid
+Select count(*) As 'Department Count' FROM dbo.EmployeeDetails a inner join dbo.Employee b on  a.EmployeeID =b.ID Group BY deptid 
 --Change Tina salary to 900000
 UPDATE dbo.EmployeeDetails
 set Salary = 90000
 where EmployeeID =5
+
+---* inner query to join department location with department ID
+Select FirstName,LastName,_NAME
+FROM Employee a INNER join dbo.Department b on a.deptid = b.ID Where _NAME = 'Marketting'
