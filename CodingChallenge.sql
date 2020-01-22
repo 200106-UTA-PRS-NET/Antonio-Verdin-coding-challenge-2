@@ -1,3 +1,4 @@
+---Creating Tables
 Create Table Department(
     ID INTEGER not null IDENTITY(1,1),
     _NAME varchar(50),
@@ -25,6 +26,7 @@ Create Table EmployeeDetails(
     PRIMARY KEY(ID),
     FOREIGN KEY(EmployeeID) REFERENCES Employee(ID)
 )
+--Adding Three Records to each Table--
 
 INSERT into Department VALUES('IT', 'Seattle')
 Insert into Department values('HR', 'San Antonio')
@@ -38,3 +40,21 @@ Insert into dbo.EmployeeDetails values(1,500000,'100','South Bend Rd','Seattle',
 Insert into dbo.EmployeeDetails values(2,600000,'100','New Rd','San Antonio','TX','United States')
 Insert into dbo.EmployeeDetails values(4,1500000,'100','Earth Bend Rd','New York','NY','United States')
 
+---Adding Marketing Department
+Insert into Department values('Marketting', 'Boston')
+--determining department id for marketting
+select * from Department where _NAME  = 'Marketting'
+---Adding tina to department 4 which is marketing
+Insert into dbo.Employee values ('Tina','Smith',874550167,4)
+Insert into dbo.EmployeeDetails values (5,1500000,'100','Earth Bend Rd','New York','NY','United States')
+--View all employees in marketing
+Select *
+FROM Employee where deptid=4
+--Report of salary from marketing
+Select SUM(Salary) FROM dbo.EmployeeDetails a inner join dbo.Employee b on  a.EmployeeID =b.ID WHERE deptid = 4
+--Report for each department
+Select count(*) As 'Department Count' FROM dbo.EmployeeDetails a inner join dbo.Employee b on  a.EmployeeID =b.ID Group BY deptid
+--Change Tina salary to 900000
+UPDATE dbo.EmployeeDetails
+set Salary = 90000
+where EmployeeID =5
